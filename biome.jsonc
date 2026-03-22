@@ -75,5 +75,5 @@
       }
     }
   },
-  "html": { "formatter": { "selfCloseVoidElements": "always" } }
+  "html": { "formatter": { "enabled": true, "selfCloseVoidElements": "always" } }
 }
