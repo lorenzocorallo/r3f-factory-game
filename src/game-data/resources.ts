@@ -1,20 +1,17 @@
 import type { ExtractableResource, Resource } from "../store/game"
 
 export const RESOURCE_LABELS: Record<Resource, string> = {
-  wood: "Wood",
   iron: "Iron",
   coal: "Coal",
 }
 
-export const EXTRACTABLE_RESOURCE_META: Record<
-  ExtractableResource,
-  {
-    label: string
-    shortLabel: string
-    tileColor: string
-    accentColor: string
-  }
-> = {
+type ResourceMetadata = {
+  label: string
+  shortLabel: string
+  tileColor: string
+  accentColor: string
+}
+export const EXTRACTABLE_RESOURCE_META: Record<ExtractableResource, ResourceMetadata> = {
   iron: {
     label: "Iron Ore",
     shortLabel: "Fe",

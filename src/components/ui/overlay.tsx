@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import type { IconType } from "react-icons"
-import { GiClockwork, GiCoalPile, GiDrill, GiHouse, GiOre, GiUpgrade, GiWoodPile } from "react-icons/gi"
+import { GiClockwork, GiCoalPile, GiDrill, GiHouse, GiOre, GiUpgrade } from "react-icons/gi"
 import { EXTRACTABLE_RESOURCE_META, RESOURCE_LABELS } from "../../game-data/resources"
 import { getExtractorStats, getExtractorUpgradeCost, type Resource, useGameStore } from "../../store/game"
 import type { TileDescriptor } from "../3d/game-canvas"
@@ -11,7 +11,6 @@ const IS_DEV = import.meta.env.DEV
 const RESOURCE_ICONS: Record<Resource, IconType> = {
   iron: GiOre,
   coal: GiCoalPile,
-  wood: GiWoodPile,
 }
 
 const hasEnoughForCost = (inventory: Record<Resource, number>, cost: Partial<Record<Resource, number>>) => {
@@ -100,7 +99,7 @@ export const UIOverlay = ({
       .join(" + ")
   }, [upgradeCost])
 
-  const inventoryResources: Resource[] = ["iron", "coal", "wood"]
+  const inventoryResources: Resource[] = ["iron", "coal"]
 
   return (
     <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-4 z-10">

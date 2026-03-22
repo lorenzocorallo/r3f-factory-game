@@ -3,7 +3,7 @@ import { create } from "zustand"
 export const EXTRACTABLE_RESOURCES = ["iron", "coal"] as const
 export type ExtractableResource = (typeof EXTRACTABLE_RESOURCES)[number]
 
-export type Resource = "wood" | ExtractableResource
+export type Resource = ExtractableResource
 export type Structure = "extractor"
 
 export type ResourceCost = Partial<Record<Resource, number>>
@@ -88,7 +88,7 @@ interface GameState {
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
-  inventory: { iron: 100, coal: 50, wood: 0 },
+  inventory: { iron: 100, coal: 50 },
   buildings: new Map(),
   selectedTool: { type: "cursor" },
 
