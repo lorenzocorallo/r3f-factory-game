@@ -172,6 +172,10 @@ const InfiniteHexField = ({
     return getRadiusForMaxZoom(camera)
   }, [camera])
 
+  const centerRaycaster = useMemo(() => new THREE.Raycaster(), [])
+  const groundPlane = useMemo(() => new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), [])
+  const centerHit = useMemo(() => new THREE.Vector3(), [])
+
   useFrame(() => {
     const controls = controlsRef.current
     const target = controls?.target
@@ -195,8 +199,11 @@ const InfiniteHexField = ({
       }
     }
 
-    const { q, r } = worldToAxial(target.x, target.z)
-    setCenter((prev) => (prev.q === q && prev.r === r ? prev : { q, r, s: -q - r }))
+    centerRaycaster.setFromCamera(new THREE.Vector2(0, 0), camera)
+    if (centerRaycaster.ray.intersectPlane(groundPlane, centerHit)) {
+      const { q, r } = worldToAxial(centerHit.x, centerHit.z)
+      setCenter((prev) => (prev.q === q && prev.r === r ? prev : { q, r, s: -q - r }))
+    }
   })
 
   const tiles = useMemo<TileDescriptor[]>(() => {
@@ -439,9 +446,9 @@ export const GameCanvas = ({
       <MapControls
         ref={controlsRef}
         enableRotate={false}
-        screenSpacePanning={false}
+        screenSpacePanning
         enableDamping={false}
-        panSpeed={1.55}
+        panSpeed={1}
         zoomSpeed={1.35}
         minZoom={MIN_ZOOM}
         maxZoom={MAX_ZOOM}
