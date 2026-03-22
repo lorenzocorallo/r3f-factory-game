@@ -40,6 +40,9 @@
           }
         }
       },
+      "a11y": {
+        "noStaticElementInteractions": "info"
+      },
       "correctness": {
         "useJsonImportAttributes": "warn",
         "noPrivateImports": "error"
